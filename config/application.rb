@@ -29,5 +29,7 @@ module Krumblr
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+	#uses error pages from view
+	config.exceptions_app = self.routes
   end
 end
