@@ -21,7 +21,11 @@
 </p>
 <p>
     <%= form.label :password %><br>
-    <%= form.text_field :password %>
+    <%= form.text_field :password, type: "password" %>
+</p>
+<p>
+    <%= form.label :password_confirmation %><br>
+    <%= form.text_field :password_confirmation, type: "password" %>
 </p>
 
   <div class="actions">

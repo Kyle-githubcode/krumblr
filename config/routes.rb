@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'categories#index'
   get 'errors/not_found'
   get 'errors/internal_server_error'
   match "/404", :to => "errors#not_found", :via => :all
@@ -8,5 +9,4 @@ Rails.application.routes.draw do
   resources :blogs
   resources :categories
   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
