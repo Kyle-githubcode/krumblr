@@ -28,11 +28,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 	
     respond_to do |format|
-      if(confirmation_params[:password] != confirmation_params[:password_confirmation])
-        @user.errors.add(:password, :blank, message: "does not match confirmation")
-        format.html { render :new}
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      elsif @user.save
+      if @user.save
 			  format.html { redirect_to @user, notice: 'User was successfully created.' }
 			  format.json { render :show, status: :created, location: @user }
 		  else
@@ -72,11 +68,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
-    end
-
-	def confirmation_params
-      params.require(:user).permit(:password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
 end

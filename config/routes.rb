@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
   root 'categories#index'
   get 'errors/not_found'
   get 'errors/internal_server_error'
