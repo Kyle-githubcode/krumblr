@@ -1,26 +1,5 @@
-<%= form_with(model: session, local: true) do |form| %>
-  <% if session.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(session.errors.count, "error") %> prohibited this session from being created:</h2>
+<h1>Login</h1>
 
-      <ul>
-      <% session.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render 'form', session: @session %>
 
-    <p>
-        <%= form.label :email %><br>
-        <%= form.text_field :email %>
-    </p>
-    <p>
-        <%= form.label :password %><br>
-        <%= form.text_field :password %>
-    </p>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= link_to 'New User', signup_path %>

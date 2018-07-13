@@ -4,11 +4,14 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: user_params[:email].downcase)
-    if user && user.authenticate(user_params[:password])
-      # login user
-    else
-      # error
-      render 'new'
+    respond_to do |format|
+      if user && user.authenticate(user_params[:password])
+        log_in(user)
+        format.html { redirect_to user, notice: 'Login Successful' }
+      else
+        # error
+        format.html { render :new }
+      end
     end
   end
 
@@ -17,6 +20,6 @@ class SessionsController < ApplicationController
 
   private
   def user_params
-    params.require(:session).permit(:email, :password)
+    params.permit(:email, :password)
   end
 end
