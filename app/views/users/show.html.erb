@@ -5,12 +5,22 @@
     Email: <%= @user.email %>
 </p>
 <p>
-     Blogs:
+     Blogs:<br>
+  <tbody>
     <% @user.blogs.each do |blog| %>
-    <li>
-        <%= link_to blog.title, blog %>
-      </li>
+    <tr>
+        <td><%= blog.title %></td>
+    </tr>
+    <tr>
+        <td><%= link_to 'Show', blog %></td>
+        <% if logged_in? && current_user == blog.user %>
+            <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+            <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+    </tr>
     <% end %>
+  </tbody>
+</table>
 </p>
 
 <% if logged_in? && current_user == @user %>

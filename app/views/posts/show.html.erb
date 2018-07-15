@@ -20,7 +20,7 @@
     </tr>
     <tr>
         <td><%= link_to 'Show', comment %></td>
-        <% if logged_in? && current_user == @post.user %>
+        <% if logged_in? && current_user == comment.user %>
             <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
             <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
@@ -35,5 +35,7 @@
     <%= render 'commentform', comment: @post.comments.build %>
 <% end %>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if logged_in? && current_user == @post.user %>
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
 <%= link_to 'Back', @post.blog %>

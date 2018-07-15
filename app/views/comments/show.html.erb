@@ -4,6 +4,7 @@
     <%= @comment.content %><br>
     User: <%= @comment.user.name %>
 </p>
-
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<% if logged_in? && current_user == @comment.user %>
+    <%= link_to 'Edit', edit_comment_path(@comment) %> |
+<% end %>
 <%= link_to 'Back', @comment.post %>

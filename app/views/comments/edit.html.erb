@@ -1,6 +1,10 @@
 <h1>Editing Comment</h1>
 
-<%= render 'form', comment: @comment %>
+<% if logged_in? && current_user == @comment.user %>
+    <%= render 'form', comment: @comment %>
+<% else %>
+    <p>You do not have access to edit this comment </p>
+<% end %>
 
 <%= link_to 'Show', @comment %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Back', @comment.post %>

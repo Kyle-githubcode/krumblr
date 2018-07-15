@@ -33,7 +33,7 @@
 <!--Allows the blog owner to create a new post -->
 <% if logged_in? && current_user == @blog.user %>
     <%= render 'postform', post: @blog.posts.build %>
-<% end %>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
+    <%= link_to 'Edit', edit_blog_path(@blog) %> |
+<% end %>
 <%= link_to 'Back', root_path %>

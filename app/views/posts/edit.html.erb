@@ -1,6 +1,10 @@
 <h1>Editing Post</h1>
 
-<%= render 'form', post: @post %>
+<% if logged_in? && current_user == @post.user %>
+    <%= render 'form', post: @post %>
+<% else %>
+    <p>You do not have access to edit this post </p>
+<% end %>
 
 <%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', @post.blog %>
