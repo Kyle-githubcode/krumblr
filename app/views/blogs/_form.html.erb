@@ -15,6 +15,10 @@
         <%= form.label :title %><br>
         <%= form.text_field :title %>
     </p>
+    <p>
+        <%= form.label :Category %><br>
+        <%= form.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+    </p>
 
   <div class="actions">
     <%= form.submit %>

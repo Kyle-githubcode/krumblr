@@ -1,6 +1,10 @@
-<h1>Editing User</h1>
+<h1>Update Account Profile</h1>
 
+<% if logged_in? && current_user == @user %>
 <%= render 'form', user: @user %>
+<% else %>
+<p>You do not have access to this account </p>
+<% end %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

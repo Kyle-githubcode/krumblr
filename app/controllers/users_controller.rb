@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -29,7 +30,8 @@ class UsersController < ApplicationController
 	
     respond_to do |format|
       if @user.save
-			  format.html { redirect_to @user, notice: 'User was successfully created.' }
+        log_in(@user)
+			  format.html { redirect_to @user, notice: 'Account was successfully created.' }
 			  format.json { render :show, status: :created, location: @user }
 		  else
 			  format.html { render :new }
@@ -43,7 +45,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -57,7 +59,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

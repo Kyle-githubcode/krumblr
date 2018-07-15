@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-    <%= @category.name %>
+    <%= @category.name %> Blogs:
+    <% @category.blogs.each do |blog| %>
+    <li>
+        <%= link_to blog.title, blog %>
+      </li>
+    <% end %>
 </p>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Back', root_path %>

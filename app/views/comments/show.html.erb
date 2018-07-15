@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-    <%= @comment.content %>
+    <%= @comment.content %><br>
+    User: <%= @comment.user.name %>
 </p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Back', @comment.post %>
