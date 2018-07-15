@@ -7,6 +7,19 @@ body {
   line-height: 18px;
 }
 
+//Navbar styles
+nav ul {
+  padding: 5px;
+  list-style: none;
+  font-weight: bold;
+
+   li {
+      display: inline;
+      margin-right: 20px;
+      padding: 0px;
+  }
+}
+
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;

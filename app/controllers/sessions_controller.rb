@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         log_in(user)
         format.html { redirect_to user, notice: 'Login Successful' }
       else
-        # error
+        flash.now[:error] = 'Invalid email or password'
         format.html { render :new }
       end
     end

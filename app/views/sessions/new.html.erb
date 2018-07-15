@@ -1,5 +1,9 @@
 <h1>Login</h1>
 
+<% flash.each do |error, message| %>
+    <div class="flash <%= error %>"><%= message %></div>
+<% end %>
+
 <%= render 'form', session: @session %>
 
 <%= link_to 'New User', signup_path %>
