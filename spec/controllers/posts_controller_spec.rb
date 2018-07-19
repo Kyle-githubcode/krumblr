@@ -24,28 +24,33 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe PostsController, type: :controller do
+  before(:each) do
+    @user = User.create!(name:'test', email: 'test', password:'test', password_confirmation:'test')
+    @category = Category.create!(name: 'test')
+    @blog = Blog.create!(title: 'test', user_id: @user.id, category_id: @category.id)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Post. As you add validations to Post, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {content: 'test', blog_id:@blog.id, user_id: @user.id}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {user_id:''}
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # PostsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { {user_id: @user.id} }
 
   describe "GET #index" do
     it "returns a success response" do
       post = Post.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -53,14 +58,14 @@ RSpec.describe PostsController, type: :controller do
     it "returns a success response" do
       post = Post.create! valid_attributes
       get :show, params: {id: post.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -68,7 +73,7 @@ RSpec.describe PostsController, type: :controller do
     it "returns a success response" do
       post = Post.create! valid_attributes
       get :edit, params: {id: post.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -89,7 +94,7 @@ RSpec.describe PostsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {post: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
@@ -97,14 +102,14 @@ RSpec.describe PostsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {content: 'updated'}
       }
 
       it "updates the requested post" do
         post = Post.create! valid_attributes
         put :update, params: {id: post.to_param, post: new_attributes}, session: valid_session
         post.reload
-        skip("Add assertions for updated state")
+        assert post.content == 'updated'
       end
 
       it "redirects to the post" do
@@ -118,7 +123,7 @@ RSpec.describe PostsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         post = Post.create! valid_attributes
         put :update, params: {id: post.to_param, post: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
